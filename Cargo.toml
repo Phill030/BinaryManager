@@ -1,0 +1,17 @@
+[package]
+name = "binary_rw"
+version = "1.0.1"
+authors = ["Phill030"]
+edition = "2021"
+
+description = "A binary reader/writer library for rust"
+readme = "README.md"
+keywords = ["binary", "reader", "writer"]
+license = "MIT"
+
+[dependencies]
+thiserror = "1.0.40"
+anyhow = "1.0.71"
+
+[features]
+wasm32 = []
