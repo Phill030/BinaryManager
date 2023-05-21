@@ -1,6 +1,6 @@
 # BinaryManager
 ## A binary reader/writer for the rust language, with a similar syntax to the C# BinaryWriter and BinaryReader
-## Modified version of binary_rw which makes the stream public and add additional methods like read_bytes_at or read_big_string
+### Modified version of binary_rw which makes the stream public and adds additional methods like read_bytes_at or read_big_string
 
 ------------------------------
 #### Examples
