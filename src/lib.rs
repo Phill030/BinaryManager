@@ -74,7 +74,6 @@ pub trait ReadStream: Read + SeekStream {}
 /// Trait for a writable stream.
 pub trait WriteStream: Write + SeekStream {}
 
-
 /// Read from a stream.
 pub struct BinaryReader<'a> {
     ///
@@ -260,8 +259,7 @@ impl<'a> BinaryReader<'a> {
         let len = self.read_i32()? as usize;
         let str = self.read_bytes(len)?;
         Ok(String::from_utf8(str)?)
-    } 
-
+    }
 }
 
 /// Write to a stream.
