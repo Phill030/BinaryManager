@@ -264,7 +264,8 @@ impl<'a> BinaryReader<'a> {
 
 /// Write to a stream.
 pub struct BinaryWriter<'a> {
-    stream: &'a mut dyn WriteStream,
+    /// The WriteStream, which is publicly accessible
+    pub stream: &'a mut dyn WriteStream,
     endian: Endian,
 }
 
@@ -376,6 +377,24 @@ impl<'a> BinaryWriter<'a> {
 
     /// Write a byte buffer to the stream.
     pub fn write_bytes<B: AsRef<[u8]>>(&mut self, data: B) -> Result<usize> {
+        Ok(self.stream.write(data.as_ref())?)
+    }
+
+    /// Writes bytes at a certain position. Does not go back to it's original position!
+    pub fn write_bytes_at<B: AsRef<[u8]>>(&mut self, data: B, position: usize) -> Result<usize> {
+        self.stream.seek(position)?;
+        Ok(self.stream.write(data.as_ref())?)
+    }
+
+    /// Writes a bigstring with an optional position
+    pub fn write_big_string<B: AsRef<[u8]>>(
+        &mut self,
+        data: B,
+        position: Option<usize>,
+    ) -> Result<usize> {
+        if let Some(pos) = position {
+            self.stream.seek(pos)?;
+        }
         Ok(self.stream.write(data.as_ref())?)
     }
 
